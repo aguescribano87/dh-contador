@@ -1,18 +1,18 @@
 import { useContext } from "react"
-import { DisplayContext } from "../context/displayContext"
+import { DisplayContext, useStore } from "../context/displayContext"
 
 const Contador = () => {
-  const {display, setDisplay} = useContext(DisplayContext)
-
+  const [store, dispatch] = useContext(DisplayContext)
+  
   return (
     <>
-      <span className='nameDisplay'>{display}</span>
+      <span className='nameDisplay'>{store}</span>
       <div className='containerButtons'>
-        <button onClick={() => setDisplay(display - 5)}> -5 </button>
-        <button onClick={() => setDisplay(display - 1)}> -1 </button>
-        <button onClick={() => setDisplay(0)}> Reset </button>
-        <button onClick={() => setDisplay(display + 1)}> +1 </button>
-        <button onClick={() => setDisplay(display + 5 )}> +5 </button>
+        <button onClick={() => dispatch({ type: "RESTAR", payload: 5 })}> -5 </button>
+        <button onClick={() => dispatch({ type: "RESTAR", payload: 1 })}> -1 </button>
+        <button onClick={() => dispatch({})}> Reset </button>
+        <button onClick={() => dispatch({ type: "SUMAR", payload: 1 })}> +1 </button>
+        <button onClick={() => dispatch({ type: "SUMAR", payload: 5 })}> +5 </button>
       </div>
     </>
   )

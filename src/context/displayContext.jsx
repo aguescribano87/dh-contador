@@ -1,12 +1,13 @@
-import { createContext, useState } from "react";
+import { createContext, useReducer, useState } from "react";
+import { displayReducer, initialState } from "./miReducer";
 
 export const DisplayContext = createContext()
 
-export const DisplayProvider = ({children}) => {
-    const [display, setDisplay] = useState(0)
+export const DisplayProvider = ({ children }) => {
+    const [store, dispatch] = useReducer(displayReducer, initialState)
 
     return (
-        <DisplayContext.Provider value={{display, setDisplay}}>
+        <DisplayContext.Provider value={[store, dispatch]}>
             {children}
         </DisplayContext.Provider>
     )
