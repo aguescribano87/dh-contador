@@ -1,9 +1,23 @@
-import { useContext } from "react"
-import { DisplayContext, useStore } from "../context/displayContext"
+import { useEffect, useRef } from "react"
+import { useDispatch, useStore } from "../context/displayContext"
 
 const Contador = () => {
-  const [store, dispatch] = useContext(DisplayContext)
-  
+  const store = useStore()
+  const dispatch = useDispatch()
+
+  const inputRef = useRef(null)
+  const miRef = useRef(null)
+  console.log(miRef)
+  const handleBtn = () => inputRef.current.focus()
+
+/*   useEffect(() => {
+    if (miRef.current === 0) {
+      miRef.current = miRef.current + 1
+      return
+    }
+    console.log("el estado cambio")
+  }, [store]) */
+
   return (
     <>
       <span className='nameDisplay'>{store}</span>
@@ -14,6 +28,8 @@ const Contador = () => {
         <button onClick={() => dispatch({ type: "SUMAR", payload: 1 })}> +1 </button>
         <button onClick={() => dispatch({ type: "SUMAR", payload: 5 })}> +5 </button>
       </div>
+      <input ref={inputRef} />
+      <button onClick={handleBtn}>Hola</button>
     </>
   )
 }
